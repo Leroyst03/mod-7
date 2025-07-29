@@ -7,6 +7,8 @@ app.get('/', (req, res) => {
   res.send('Ruta principal desde Vercel');
 });
 
-app.use('/mensaje', saludo);
+app.use("mensaje/", saludo);
 
-module.exports = app;
+app.listen(process.env.PORT, () => {
+    console.log("Server running");
+})
