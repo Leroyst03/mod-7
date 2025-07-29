@@ -1,3 +1,4 @@
 module.exports = (req, res) => {
-  res.status(200).json({ mensaje: "¡API actualizada y mejorada!" });
+    const mensaje = process.env.MENSAJE_BIENVENIDA;
+    res.status(200).json({ mensaje: `${mensaje}` });
 };
