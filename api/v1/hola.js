@@ -1,11 +1,8 @@
 const express = require('express');
-const app = express();
+const router = express.Router();
 
-app.use(express.json());
+router.get('/saludo', (req, res) => {
+  res.send('¡Bienvenido a la primera version de nuestra API!');
+});
 
-app.route("/mensaje")
-    .get((req, res) => {
-        return res.json({"mensaje": "Bienvendio a la version 1 de nuestra API!"});
-    });
-
-    
+module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
-const app = express();
 const dotenv = require('dotenv');
+const app = express();
+const saludo = require('./hola');
 dotenv.config();
 
 app.route("/")
@@ -8,7 +9,9 @@ app.route("/")
         return res.send("Ruta principal");
     });
 
+app.use('/mensaje', saludo);
+
 
 app.listen(process.env.PORT, () => {
-    console.log(`Servidor en: http://localhost:${PORT}`);
+    console.log(`Servidor en: http://localhost:${process.env.PORT}`);
 });
