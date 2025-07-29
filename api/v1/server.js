@@ -1,14 +1,10 @@
 const express = require('express');
-const saludo = require('./hola');
-
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Ruta principal desde Vercel');
+  res.send('Servidor Express funcionando 🎉');
 });
 
-app.use("mensaje/", saludo);
-
-app.listen(process.env.PORT, () => {
-    console.log("Server running");
-})
+app.listen(3000, () => {
+  console.log('Servidor escuchando en el puerto 3000');
+});
