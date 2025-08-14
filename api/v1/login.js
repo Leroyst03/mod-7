@@ -1,8 +1,8 @@
 import { MongoClient } from "mongodb";
 import jwt from "jsonwebtoken";
 
-const uri = process.env.MONGODB_URI;
-const secret = process.env.JWT_SECRET;
+const uri = process.env.URL;
+const secret = process.env.FRIMA;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
