@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import jwt from "jsonwebtoken";
 
 const uri = process.env.URL;
-const secret = process.env.FRIMA;
+const secret = process.env.FIRMA;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -26,6 +26,6 @@ export default async function handler(req, res) {
     res.status(200).json({ token });
   } catch (err) {
     console.error("Error en login:", err);
-    res.status(500).json({ error: "Error interno del servidor", message: err.message });
+    res.status(500).json({ error: "Error interno del servidor", message: err.message});
   }
 }
