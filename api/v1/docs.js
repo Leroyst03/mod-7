@@ -1,10 +1,13 @@
 import fs from "fs";
 import path from "path";
+import { serve } from "swagger-ui-dist";
 
-export default function handler(req, res) {
-  const filePath = path.join(process.cwd(), "api.yaml");
-  const yaml = fs.readFileSync(filePath, "utf8");
+export default async function handler(req, res) {
+  const indexPath = path.join(serve.getAbsoluteFSPath(), "index.html");
+  let html = fs.readFileSync(indexPath, "utf8");
 
-  res.setHeader("Content-Type", "text/yaml");
-  res.status(200).send(yaml);
+  html = html.replace("https://petstore.swagger.io/v2/swagger.json", "/api/v1/spec");
+
+  res.setHeader("Content-Type", "text/html");
+  res.status(200).send(html);
 }
