@@ -1,8 +1,8 @@
-import jwt from "jsonwebtoken";
 import { MongoClient } from "mongodb";
+import jwt from "jsonwebtoken";
 
-const uri = process.env.MONGODB_URI;
-const secret = process.env.JWT_SECRET;
+const uri = process.env.URL;
+const secret = process.env.FRIMA;
 
 export default async function handler(req, res) {
   const auth = req.headers.authorization;
@@ -17,10 +17,15 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: "Token inválido" });
   }
 
-  const client = new MongoClient(uri);
-  await client.connect();
-  const db = client.db();
-  const usuarios = await db.collection("usuarios").find().project({ _id: 0 }).toArray();
+  try {
+    const client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db("test");
 
-  res.status(200).json({ usuarios });
+    const usuarios = await db.collection("usuarios").find().project({ _id: 0 }).toArray();
+    res.status(200).json({ usuarios });
+  } catch (err) {
+    console.error("Error en usuarios:", err);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
 }
