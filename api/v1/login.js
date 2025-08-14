@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
     if (!usuario) return res.status(401).json({ error: "Usuario no encontrado" });
 
-    const token = jwt.sign({ email: usuario.email, nombre: usuario.nombre }, secret, {
+    const token = jwt.sign({ correo: usuario.correo, nombre: usuario.nombre }, secret, {
       expiresIn: "1h",
     });
 
