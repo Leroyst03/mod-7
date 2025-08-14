@@ -1,0 +1,97 @@
+api: 3.0.0
+info:
+  title: API de ejemplo
+  version: 1.0.0
+  description: Documentación de la API de usuarios y autenticación
+
+paths:
+  /api/hola:
+    get:
+      summary: Saludo básico
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: Hola Mundo
+
+  /api/saludo:
+    get:
+      summary: Saludo personalizado
+      parameters:
+        - name: nombre
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Saludo con nombre
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  saludo:
+                    type: string
+                    example: Hola, invitado!
+
+  /api/login:
+    post:
+      summary: Autenticación de usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: leroy@example.com
+      responses:
+        '200':
+          description: Token generado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Usuario no encontrado
+        '400':
+          description: Email requerido
+
+  /api/usuarios:
+    get:
+      summary: Lista de usuarios (requiere token)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  usuarios:
+                    type: array
+                    items:
+                      type: object
+        '401':
+          description: Token inválido o no proporcionado
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
