@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import jwt from "jsonwebtoken";
 
 const uri = process.env.URL;
-const secret = process.env.FRIMA;
+const secret = process.env.FIRMA;
 
 export default async function handler(req, res) {
   const auth = req.headers.authorization;
