@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   } catch (err) {
     console.error("Error en login:", err);
     res.status(500).json({ error: "Error interno del servidor", 
-        error: err.message
+        message: err.message
     });
   }
 }
